@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "outDir": "dist",
+    "rootDir": "",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "inlineSourceMap": true,
+    "sourceRoot": "./src",
+    "inlineSources": true,
+    "strictNullChecks": true,
+    "target": "es2016",
+    "lib": [
+      "es2017"
+    ],
+    "baseUrl": ".",
+    "strict": true,
+    "strictFunctionTypes": false,
+    "types": [
+      "jasmine",
+      "node"
+    ],
+  },
+  "exclude": [
+    "dist",
+    "**/files/**/*",
+    "**/other-files/**/*"
+  ]
+}

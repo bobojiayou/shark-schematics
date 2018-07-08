@@ -1,0 +1,35 @@
+{
+    "name": "shark-schematics",
+    "version": "1.0.1",
+    "description": "shark-generate CLI schematics ",
+    "engines": {
+        "node": ">=8.9.0"
+    },
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w"
+    },
+    "keywords": [
+        "schematics",
+        "shark-schematics",
+        "shark-generate"
+    ],
+    "author": "yangbo",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bobojiayou/shark-schematics.git"
+    },
+    "license": "MIT",
+    "schematics": "./dist/collection.json",
+    "dependencies": {
+        "@angular-devkit/core": "0.7.0-beta.2",
+        "@angular-devkit/schematics": "0.7.0-beta.2",
+        "typescript": "^2.7.2"
+    },
+    "devDependencies": {
+        "@types/jasmine": "^2.8.8",
+        "@types/node": "9.6.1",
+        "jasmine": "^3.1.0",
+        "rxjs": "^6.0.0"
+    }
+}
