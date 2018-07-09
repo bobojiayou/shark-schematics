@@ -51,7 +51,7 @@ type WorkspaceSchema = experimental.workspace.WorkspaceSchema;
 function addAppToWorkspaceFile(options: E2eOptions, workspace: WorkspaceSchema): Rule {
   return (host: Tree, context: SchematicContext) => {
     // TODO: use JsonAST
-    // const workspacePath = '/angular.json';
+    // const workspacePath = '/shark-generate-conf.json';
     // const workspaceBuffer = host.read(workspacePath);
     // if (workspaceBuffer === null) {
     //   throw new SchematicsException(`Configuration file (${workspacePath}) not found.`);

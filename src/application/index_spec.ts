@@ -14,7 +14,7 @@ import { Schema as ApplicationOptions } from './schema';
 // tslint:disable:max-line-length
 describe('Application Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
 
@@ -67,7 +67,7 @@ describe('Application Schematic', () => {
     const options = { ...defaultOptions };
 
     const tree = schematicRunner.runSchematic('application', options, workspaceTree);
-    const workspace = JSON.parse(tree.readContent('/angular.json'));
+    const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
     expect(workspace.projects.foo).toBeDefined();
     expect(workspace.defaultProject).toBe('foo');
   });
@@ -76,7 +76,7 @@ describe('Application Schematic', () => {
     const options = { ...defaultOptions };
 
     const tree = schematicRunner.runSchematic('application', options, workspaceTree);
-    const workspace = JSON.parse(tree.readContent('/angular.json'));
+    const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
     expect(workspace.projects.foo.prefix).toEqual('app');
   });
 
@@ -84,7 +84,7 @@ describe('Application Schematic', () => {
     const options = { ...defaultOptions, prefix: 'pre' };
 
     const tree = schematicRunner.runSchematic('application', options, workspaceTree);
-    const workspace = JSON.parse(tree.readContent('/angular.json'));
+    const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
     expect(workspace.projects.foo.prefix).toEqual('pre');
   });
 
@@ -204,7 +204,7 @@ describe('Application Schematic', () => {
       const options = { ...defaultOptions, projectRoot: '' };
 
       const tree = schematicRunner.runSchematic('application', options, workspaceTree);
-      const config = JSON.parse(tree.readContent('/angular.json'));
+      const config = JSON.parse(tree.readContent('/shark-generate-conf.json'));
       const prj = config.projects.foo;
       expect(prj.root).toEqual('');
       const buildOpt = prj.architect.build.options;

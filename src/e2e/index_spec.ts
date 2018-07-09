@@ -13,7 +13,7 @@ import { Schema as E2eOptions } from './schema';
 // tslint:disable:max-line-length
 describe('Application Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
 
@@ -43,7 +43,7 @@ describe('Application Schematic', () => {
   });
 
   it('should create all files of an e2e application', () => {
-    const options = {...defaultOptions, projectRoot: 'e2e'};
+    const options = { ...defaultOptions, projectRoot: 'e2e' };
     const tree = schematicRunner.runSchematic('e2e', options, workspaceTree);
     const files = tree.files;
     expect(files.indexOf('/projects/foo/protractor.conf.js')).toEqual(-1);
@@ -57,14 +57,14 @@ describe('Application Schematic', () => {
   });
 
   it('should set the rootSelector in the app.po.ts from the option', () => {
-    const options = {...defaultOptions, rootSelector: 't-a-c-o'};
+    const options = { ...defaultOptions, rootSelector: 't-a-c-o' };
     const tree = schematicRunner.runSchematic('e2e', options, workspaceTree);
     const content = tree.readContent('/projects/foo/src/app.po.ts');
     expect(content).toMatch(/t\-a\-c\-o/);
   });
 
   it('should set the rootSelector in the app.po.ts from the option with emoji', () => {
-    const options = {...defaultOptions, rootSelector: '🌮-🌯'};
+    const options = { ...defaultOptions, rootSelector: '🌮-🌯' };
     const tree = schematicRunner.runSchematic('e2e', options, workspaceTree);
     const content = tree.readContent('/projects/foo/src/app.po.ts');
     expect(content).toMatch(/🌮-🌯/);
@@ -73,20 +73,20 @@ describe('Application Schematic', () => {
   describe('workspace config', () => {
     it('should create the e2e app', () => {
       const tree = schematicRunner.runSchematic('e2e', defaultOptions, workspaceTree);
-      const workspace = JSON.parse(tree.readContent('/angular.json'));
+      const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
       expect(workspace.projects.foo).toBeDefined();
     });
 
     it('should set 2 targets for the app', () => {
       const tree = schematicRunner.runSchematic('e2e', defaultOptions, workspaceTree);
-      const workspace = JSON.parse(tree.readContent('/angular.json'));
+      const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
       const architect = workspace.projects.foo.architect;
       expect(Object.keys(architect)).toEqual(['e2e', 'lint']);
     });
 
     it('should set the e2e options', () => {
       const tree = schematicRunner.runSchematic('e2e', defaultOptions, workspaceTree);
-      const workspace = JSON.parse(tree.readContent('/angular.json'));
+      const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
       const e2eOptions = workspace.projects.foo.architect.e2e.options;
       expect(e2eOptions.protractorConfig).toEqual('projects/foo/protractor.conf.js');
       expect(e2eOptions.devServerTarget).toEqual('app:serve');
@@ -94,7 +94,7 @@ describe('Application Schematic', () => {
 
     it('should set the lint options', () => {
       const tree = schematicRunner.runSchematic('e2e', defaultOptions, workspaceTree);
-      const workspace = JSON.parse(tree.readContent('/angular.json'));
+      const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
       const lintOptions = workspace.projects.foo.architect.lint.options;
       expect(lintOptions.tsConfig).toEqual('projects/foo/tsconfig.e2e.json');
     });

@@ -81,7 +81,7 @@ describe('Library Schematic', () => {
   it(`should add library to workspace`, () => {
     const tree = schematicRunner.runSchematic('library', defaultOptions, workspaceTree);
 
-    const workspace = getJsonFileContent(tree, '/angular.json');
+    const workspace = getJsonFileContent(tree, '/shark-generate-conf.json');
     expect(workspace.projects.foo).toBeDefined();
     expect(workspace.defaultProject).toBe('foo');
   });
@@ -89,7 +89,7 @@ describe('Library Schematic', () => {
   it('should set the prefix to lib if none is set', () => {
     const tree = schematicRunner.runSchematic('library', defaultOptions, workspaceTree);
 
-    const workspace = JSON.parse(tree.readContent('/angular.json'));
+    const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
     expect(workspace.projects.foo.prefix).toEqual('lib');
   });
 
@@ -97,14 +97,14 @@ describe('Library Schematic', () => {
     const options = { ...defaultOptions, prefix: 'pre' };
     const tree = schematicRunner.runSchematic('library', options, workspaceTree);
 
-    const workspace = JSON.parse(tree.readContent('/angular.json'));
+    const workspace = JSON.parse(tree.readContent('/shark-generate-conf.json'));
     expect(workspace.projects.foo.prefix).toEqual('pre');
   });
 
   it('should handle a pascalCasedName', () => {
     const options = { ...defaultOptions, name: 'pascalCasedName' };
     const tree = schematicRunner.runSchematic('library', options, workspaceTree);
-    const config = getJsonFileContent(tree, '/angular.json');
+    const config = getJsonFileContent(tree, '/shark-generate-conf.json');
     const project = config.projects.pascalCasedName;
     expect(project).toBeDefined();
     expect(project.root).toEqual('projects/pascal-cased-name');
@@ -229,7 +229,7 @@ describe('Library Schematic', () => {
     const tsConfigJson = JSON.parse(tree.readContent('/projects/myscope/mylib/tsconfig.spec.json'));
     expect(tsConfigJson.extends).toEqual('../../../tsconfig.json');
 
-    const cfg = JSON.parse(tree.readContent('/angular.json'));
+    const cfg = JSON.parse(tree.readContent('/shark-generate-conf.json'));
     expect(cfg.projects['@myscope/mylib']).toBeDefined();
 
     const rootTsCfg = JSON.parse(tree.readContent('/tsconfig.json'));
@@ -252,7 +252,7 @@ describe('Library Schematic', () => {
     const pkgJson = JSON.parse(tree.readContent(pkgJsonPath));
     expect(pkgJson.name).toEqual(expectedScopeName);
 
-    const cfg = JSON.parse(tree.readContent('/angular.json'));
+    const cfg = JSON.parse(tree.readContent('/shark-generate-conf.json'));
     expect(cfg.projects['@myScope/myLib']).toBeDefined();
   });
 });

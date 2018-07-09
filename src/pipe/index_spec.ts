@@ -15,7 +15,7 @@ import { Schema as PipeOptions } from './schema';
 
 describe('Pipe Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: PipeOptions = {
@@ -111,9 +111,9 @@ describe('Pipe Schematic', () => {
   });
 
   it('should respect the sourceRoot value', () => {
-    const config = JSON.parse(appTree.readContent('/angular.json'));
+    const config = JSON.parse(appTree.readContent('/shark-generate-conf.json'));
     config.projects.bar.sourceRoot = 'projects/bar/custom';
-    appTree.overwrite('/angular.json', JSON.stringify(config, null, 2));
+    appTree.overwrite('/shark-generate-conf.json', JSON.stringify(config, null, 2));
 
     // should fail without a module in that dir
     expect(() => schematicRunner.runSchematic('pipe', defaultOptions, appTree)).toThrow();

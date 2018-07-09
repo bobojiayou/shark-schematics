@@ -1,8 +1,8 @@
 {
   "schematics": {
-    "ng-new": {
-      "factory": "./ng-new",
-      "schema": "./ng-new/schema.json",
+    "sgx-new": {
+      "factory": "./sgx-new",
+      "schema": "./sgx-new/schema.json",
       "description": "Create an Angular workspace.",
       "hidden": true
     },

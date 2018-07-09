@@ -14,7 +14,7 @@ import { Schema as EnumOptions } from './schema';
 
 describe('Enum Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: EnumOptions = {
@@ -55,9 +55,9 @@ describe('Enum Schematic', () => {
   });
 
   it('should respect the sourceRoot value', () => {
-    const config = JSON.parse(appTree.readContent('/angular.json'));
+    const config = JSON.parse(appTree.readContent('/shark-generate-conf.json'));
     config.projects.bar.sourceRoot = 'projects/bar/custom';
-    appTree.overwrite('/angular.json', JSON.stringify(config, null, 2));
+    appTree.overwrite('/shark-generate-conf.json', JSON.stringify(config, null, 2));
     appTree = schematicRunner.runSchematic('enum', defaultOptions, appTree);
     expect(appTree.files.indexOf('/projects/bar/custom/app/foo.enum.ts')).toBeGreaterThanOrEqual(0);
   });

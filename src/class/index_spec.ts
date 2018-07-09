@@ -14,7 +14,7 @@ import { Schema as ClassOptions } from './schema';
 
 describe('Class Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: ClassOptions = {
@@ -76,7 +76,7 @@ describe('Class Schematic', () => {
   });
 
   it('should split the name to name & type with split on "."', () => {
-    const options = {...defaultOptions, name: 'foo.model' };
+    const options = { ...defaultOptions, name: 'foo.model' };
     const tree = schematicRunner.runSchematic('class', options, appTree);
     const classPath = '/projects/bar/src/app/foo.model.ts';
     const content = tree.readContent(classPath);
@@ -90,9 +90,9 @@ describe('Class Schematic', () => {
   });
 
   it('should respect the sourceRoot value', () => {
-    const config = JSON.parse(appTree.readContent('/angular.json'));
+    const config = JSON.parse(appTree.readContent('/shark-generate-conf.json'));
     config.projects.bar.sourceRoot = 'projects/bar/custom';
-    appTree.overwrite('/angular.json', JSON.stringify(config, null, 2));
+    appTree.overwrite('/shark-generate-conf.json', JSON.stringify(config, null, 2));
     appTree = schematicRunner.runSchematic('class', defaultOptions, appTree);
     expect(appTree.files.indexOf('/projects/bar/custom/app/foo.ts')).toBeGreaterThanOrEqual(0);
   });

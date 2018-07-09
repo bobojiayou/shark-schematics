@@ -13,7 +13,7 @@ import { Schema as UniversalOptions } from './schema';
 
 describe('Universal Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: UniversalOptions = {
@@ -123,7 +123,7 @@ describe('Universal Schematic', () => {
 
   it('should update workspace with a server target', () => {
     const tree = schematicRunner.runSchematic('universal', defaultOptions, appTree);
-    const filePath = '/angular.json';
+    const filePath = '/shark-generate-conf.json';
     const contents = tree.readContent(filePath);
     const config = JSON.parse(contents.toString());
     const arch = config.projects.bar.architect;
@@ -153,6 +153,6 @@ describe('Universal Schematic', () => {
     schematicRunner.runSchematic('universal', defaultOptions, appTree);
     expect(schematicRunner.tasks.length).toBe(1);
     expect(schematicRunner.tasks[0].name).toBe('node-package');
-    expect((schematicRunner.tasks[0].options as {command: string}).command).toBe('install');
+    expect((schematicRunner.tasks[0].options as { command: string }).command).toBe('install');
   });
 });

@@ -90,7 +90,7 @@ function addDependenciesToPackageJson() {
 
 function addAppToWorkspaceFile(options: ApplicationOptions, workspace: WorkspaceSchema): Rule {
   // TODO: use JsonAST
-  // const workspacePath = '/angular.json';
+  // const workspacePath = '/shark-generate-conf.json';
   // const workspaceBuffer = host.read(workspacePath);
   // if (workspaceBuffer === null) {
   //   throw new SchematicsException(`Configuration file (${workspacePath}) not found.`);
@@ -114,24 +114,24 @@ function addAppToWorkspaceFile(options: ApplicationOptions, workspace: Workspace
   if (options.inlineTemplate === true
     || options.inlineStyle === true
     || options.style !== 'css') {
-    schematics['@schematics/angular:component'] = {};
+    schematics['shark-schematics:component'] = {};
     if (options.inlineTemplate === true) {
-      (schematics['@schematics/angular:component'] as JsonObject).inlineTemplate = true;
+      (schematics['shark-schematics:component'] as JsonObject).inlineTemplate = true;
     }
     if (options.inlineStyle === true) {
-      (schematics['@schematics/angular:component'] as JsonObject).inlineStyle = true;
+      (schematics['shark-schematics:component'] as JsonObject).inlineStyle = true;
     }
     if (options.style && options.style !== 'css') {
-      (schematics['@schematics/angular:component'] as JsonObject).styleext = options.style;
+      (schematics['shark-schematics:component'] as JsonObject).styleext = options.style;
     }
   }
 
   if (options.skipTests === true) {
     ['class', 'component', 'directive', 'guard', 'module', 'pipe', 'service'].forEach((type) => {
-      if (!(`@schematics/angular:${type}` in schematics)) {
-        schematics[`@schematics/angular:${type}`] = {};
+      if (!(`shark-schematics:${type}` in schematics)) {
+        schematics[`shark-schematics:${type}`] = {};
       }
-      (schematics[`@schematics/angular:${type}`] as JsonObject).spec = false;
+      (schematics[`shark-schematics:${type}`] as JsonObject).spec = false;
     });
   }
 

@@ -14,7 +14,7 @@ import { Schema as ServiceOptions } from './schema';
 // tslint:disable:max-line-length
 describe('Service Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: ServiceOptions = {
@@ -55,7 +55,7 @@ describe('Service Schematic', () => {
   });
 
   it('service should be tree-shakeable', () => {
-    const options = { ...defaultOptions};
+    const options = { ...defaultOptions };
 
     const tree = schematicRunner.runSchematic('service', options, appTree);
     const content = tree.readContent('/projects/bar/src/app/foo/foo.service.ts');
@@ -72,9 +72,9 @@ describe('Service Schematic', () => {
   });
 
   it('should respect the sourceRoot value', () => {
-    const config = JSON.parse(appTree.readContent('/angular.json'));
+    const config = JSON.parse(appTree.readContent('/shark-generate-conf.json'));
     config.projects.bar.sourceRoot = 'projects/bar/custom';
-    appTree.overwrite('/angular.json', JSON.stringify(config, null, 2));
+    appTree.overwrite('/shark-generate-conf.json', JSON.stringify(config, null, 2));
     appTree = schematicRunner.runSchematic('service', defaultOptions, appTree);
     expect(appTree.files.indexOf('/projects/bar/custom/app/foo/foo.service.ts'))
       .toBeGreaterThanOrEqual(0);

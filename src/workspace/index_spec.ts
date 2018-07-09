@@ -13,7 +13,7 @@ import { Schema as WorkspaceOptions } from './schema';
 
 describe('Workspace Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: WorkspaceOptions = {
@@ -27,7 +27,7 @@ describe('Workspace Schematic', () => {
     const tree = schematicRunner.runSchematic('workspace', options);
     const files = tree.files;
     expect(files.indexOf('/.editorconfig')).toBeGreaterThanOrEqual(0);
-    expect(files.indexOf('/angular.json')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/shark-generate-conf.json')).toBeGreaterThanOrEqual(0);
     expect(files.indexOf('/.gitignore')).toBeGreaterThanOrEqual(0);
     expect(files.indexOf('/package.json')).toBeGreaterThanOrEqual(0);
     expect(files.indexOf('/README.md')).toBeGreaterThanOrEqual(0);

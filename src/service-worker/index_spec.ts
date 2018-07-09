@@ -14,7 +14,7 @@ import { Schema as ServiceWorkerOptions } from './schema';
 
 describe('Service Worker Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: ServiceWorkerOptions = {
@@ -48,16 +48,16 @@ describe('Service Worker Schematic', () => {
 
   it('should update the proudction configuration', () => {
     const tree = schematicRunner.runSchematic('service-worker', defaultOptions, appTree);
-    const configText = tree.readContent('/angular.json');
+    const configText = tree.readContent('/shark-generate-conf.json');
     const config = JSON.parse(configText);
     const swFlag = config.projects.bar.architect.build.configurations.production.serviceWorker;
     expect(swFlag).toEqual(true);
   });
 
   it('should update the target options if no configuration is set', () => {
-    const options = {...defaultOptions, configuration: ''};
+    const options = { ...defaultOptions, configuration: '' };
     const tree = schematicRunner.runSchematic('service-worker', options, appTree);
-    const configText = tree.readContent('/angular.json');
+    const configText = tree.readContent('/shark-generate-conf.json');
     const config = JSON.parse(configText);
     const swFlag = config.projects.bar.architect.build.options.serviceWorker;
     expect(swFlag).toEqual(true);

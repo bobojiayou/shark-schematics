@@ -14,7 +14,7 @@ import { Schema as AppShellOptions } from './schema';
 
 describe('App Shell Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: AppShellOptions = {
@@ -48,7 +48,7 @@ describe('App Shell Schematic', () => {
 
   it('should ensure the client app has a router-outlet', () => {
     appTree = schematicRunner.runSchematic('workspace', workspaceOptions);
-    appTree = schematicRunner.runSchematic('application', {...appOptions, routing: false}, appTree);
+    appTree = schematicRunner.runSchematic('application', { ...appOptions, routing: false }, appTree);
     expect(() => {
       schematicRunner.runSchematic('appShell', defaultOptions, appTree);
     }).toThrowError();
@@ -62,7 +62,7 @@ describe('App Shell Schematic', () => {
 
   it('should add app shell configuration', () => {
     const tree = schematicRunner.runSchematic('appShell', defaultOptions, appTree);
-    const filePath = '/angular.json';
+    const filePath = '/shark-generate-conf.json';
     const content = tree.readContent(filePath);
     const workspace = JSON.parse(content);
     const target = workspace.projects.bar.architect['app-shell'];

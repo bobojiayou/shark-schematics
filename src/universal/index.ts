@@ -39,7 +39,7 @@ import { Schema as UniversalOptions } from './schema';
 
 
 function getWorkspacePath(host: Tree): string {
-  const possibleFiles = [ '/angular.json', '/.angular.json' ];
+  const possibleFiles = [ '/shark-generate-conf.json', '/.angular.json' ];
 
   return possibleFiles.filter(path => host.exists(path))[0];
 }

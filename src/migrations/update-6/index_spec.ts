@@ -23,7 +23,7 @@ describe('Migration to v6', () => {
   const defaultOptions = {};
   let tree: UnitTestTree;
   const oldConfigPath = `/.angular-cli.json`;
-  const configPath = `/angular.json`;
+  const configPath = `/shark-generate-conf.json`;
 
   beforeEach(() => {
     baseConfig = {
@@ -154,11 +154,11 @@ describe('Migration to v6', () => {
         tree.create(oldConfigPath, JSON.stringify(baseConfig, null, 2));
         tree = schematicRunner.runSchematic('migration-01', defaultOptions, tree);
         const config = getConfig(tree);
-        expect(config.schematics['@schematics/angular:component']).toBeDefined();
+        expect(config.schematics['shark-schematics:component']).toBeDefined();
       });
 
       function getSchematicConfig(host: UnitTestTree, name: string): JsonObject {
-        return getConfig(host).schematics['@schematics/angular:' + name];
+        return getConfig(host).schematics['shark-schematics:' + name];
       }
 
       describe('component config', () => {

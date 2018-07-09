@@ -12,7 +12,7 @@ import { Schema as NgNewOptions } from './schema';
 
 describe('Ng New Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
-    '@schematics/angular',
+    'shark-schematics',
     path.join(__dirname, '../collection.json'),
   );
   const defaultOptions: NgNewOptions = {
@@ -24,15 +24,15 @@ describe('Ng New Schematic', () => {
   it('should create files of a workspace', () => {
     const options = { ...defaultOptions };
 
-    const tree = schematicRunner.runSchematic('ng-new', options);
+    const tree = schematicRunner.runSchematic('sgx-new', options);
     const files = tree.files;
-    expect(files.indexOf('/bar/angular.json')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/bar/shark-generate-conf.json')).toBeGreaterThanOrEqual(0);
   });
 
   it('should create files of an application', () => {
     const options = { ...defaultOptions };
 
-    const tree = schematicRunner.runSchematic('ng-new', options);
+    const tree = schematicRunner.runSchematic('sgx-new', options);
     const files = tree.files;
     expect(files.indexOf('/bar/src/tsconfig.app.json')).toBeGreaterThanOrEqual(0);
     expect(files.indexOf('/bar/src/main.ts')).toBeGreaterThanOrEqual(0);
@@ -42,8 +42,8 @@ describe('Ng New Schematic', () => {
   it('should should set the prefix in angular.json and in app.component.ts', () => {
     const options = { ...defaultOptions, prefix: 'pre' };
 
-    const tree = schematicRunner.runSchematic('ng-new', options);
-    const content = tree.readContent('/bar/angular.json');
+    const tree = schematicRunner.runSchematic('sgx-new', options);
+    const content = tree.readContent('/bar/shark-generate-conf.json');
     expect(content).toMatch(/"prefix": "pre"/);
   });
 
@@ -53,7 +53,7 @@ describe('Ng New Schematic', () => {
       version: '6.0.0',
     };
 
-    const tree = schematicRunner.runSchematic('ng-new', options);
+    const tree = schematicRunner.runSchematic('sgx-new', options);
     const moduleContent = tree.readContent('/foo/src/app/app.module.ts');
     expect(moduleContent).toMatch(/declarations:\s*\[\s*AppComponent\s*\]/m);
   });

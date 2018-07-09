@@ -153,7 +153,7 @@ function extractCliConfig(config: CliConfig): JsonObject | null {
 }
 
 function extractSchematicsConfig(config: CliConfig): JsonObject | null {
-  let collectionName = '@schematics/angular';
+  let collectionName = 'shark-schematics';
   if (!config || !config.defaults) {
     return null;
   }
@@ -757,7 +757,7 @@ function updateTsLintConfig(): Rule {
 
 export default function (): Rule {
   return (host: Tree, context: SchematicContext) => {
-    if (host.exists('/.angular.json') || host.exists('/angular.json')) {
+    if (host.exists('/.angular.json') || host.exists('/shark-generate-conf.json')) {
       context.logger.info('Found a modern configuration file. Nothing to be done.');
 
       return host;
