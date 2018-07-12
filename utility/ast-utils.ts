@@ -587,9 +587,12 @@ export function getChineseCharacterNum(source: any, start: any, end: any) {
     return 0;
   }
   if (source.length > 0 && source.length < end) {
-    end = source.length
+    end = source.length;
   }
-  const _text = source.substring(start, end)
-  const charLen = _text.match(/[^\x00-\xff]/g).length
-  return charLen * 2
-} 
+  const _text = source.substring(start, end);
+  const chars = _text.match(/[^\x00-\xff]/g);
+  if (!chars || chars.length === 0) {
+    return 0
+  }
+  return chars.length * 2;
+}
