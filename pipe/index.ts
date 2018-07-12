@@ -30,14 +30,12 @@ import { buildDefaultPath } from '../utility/project';
 import { Schema as PipeOptions } from './schema';
 
 function addDeclarationToNgModule(options: PipeOptions): Rule {
-  console.log("--pipeoptions---", options)
 
   return (host: Tree) => {
     if (options.skipImport || !options.module) {
       return host;
     }
     const modulePath = options.module;
-    console.log('--modulePath--', modulePath)
     const text = host.read(modulePath);
     if (text === null) {
       throw new SchematicsException(`File ${modulePath} does not exist.`);
@@ -88,7 +86,6 @@ function addDeclarationToNgModule(options: PipeOptions): Rule {
 
 export default function (options: PipeOptions): Rule {
   return (host: Tree) => {
-    console.log('---当前执行目录--', process.cwd())
     const workspace = getWorkspace(host);
     if (!options.project) {
       throw new SchematicsException('Option (project) is required.');
@@ -100,12 +97,10 @@ export default function (options: PipeOptions): Rule {
     }
 
     const parsedPath = parseName(options.path, options.name);
-    console.log('--parsedPath--', parsedPath)
     options.name = parsedPath.name;
     options.path = parsedPath.path;
 
     options.module = findModuleFromOptions(host, options);
-    console.log('xxxmodule', options.module);
     const templateSource = apply(url('./files'), [
       options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
       template({

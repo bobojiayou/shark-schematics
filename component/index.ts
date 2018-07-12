@@ -64,16 +64,12 @@ function addDeclarationToNgModule(options: ComponentOptions): Rule {
       classifiedName,
       relativePath);
 
-    console.log('---modulePath---', modulePath)
     const declarationRecorder = host.beginUpdate(modulePath);
     for (const change of declarationChanges) {
       if (change instanceof InsertChange) {
-        console.log('xxxxxx---------xxxxxx', change.pos, change.toAdd)
         declarationRecorder.insertLeft(change.pos, change.toAdd);
       }
     }
-    console.log('-----host-----', host.commitUpdate)
-    console.log('---component update---', declarationRecorder)
     host.commitUpdate(declarationRecorder);
     //host.commitUpdate(declarationRecorder);
     if (options.export) {
@@ -131,7 +127,6 @@ function buildSelector(options: ComponentOptions, projectPrefix: string) {
 
 export default function (options: ComponentOptions): Rule {
   return (host: Tree, context: SchematicContext) => {
-    console.log('---context---', context)
     const workspace = getWorkspace(host);
     if (!options.project) {
       throw new SchematicsException('Option (project) is required.');
