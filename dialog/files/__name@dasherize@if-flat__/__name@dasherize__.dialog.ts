@@ -15,7 +15,7 @@ import { SharkModalService, SharkModalParams, SharkBaseModal, SharkToastrService
           changeDetection: ChangeDetectionStrategy.<%= changeDetection %> <% } %>
 })
 
-export class <%= classify(name) %> Dialog extends SharkBaseModal {
+export class <%= classify(name) %>Dialog extends SharkBaseModal {
   title: any = '标题';
   content: any = '内容';
   constructor(
