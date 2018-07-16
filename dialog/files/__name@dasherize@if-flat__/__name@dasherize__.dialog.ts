@@ -3,14 +3,14 @@ import { Component } from '@angular/core';
 import { SharkModalService, SharkModalParams, SharkBaseModal, SharkToastrService } from '@shark/shark-angularX';
 @Component({
   selector: '<%= selector %>',<% if (inlineTemplate) { %>
-    template: `
+  template: `
     <p>
       <%= dasherize(name) %> works!
     </p>
   `, <% } else { %>
   templateUrl: './<%= dasherize(name) %>.component.html', <% } if (inlineStyle) { %>
-    styles: [] <% } else { %>
-      styleUrls: ['./<%= dasherize(name) %>.component.<%= styleext %>'] <% } %> <% if (!!viewEncapsulation) { %>,
+  styles: [] <% } else { %>
+  styleUrls: ['./<%= dasherize(name) %>.component.<%= styleext %>'] <% } %> <% if (!!viewEncapsulation) { %>,
         encapsulation: ViewEncapsulation.<%= viewEncapsulation %> <% } if (changeDetection !== 'Default') { %>,
           changeDetection: ChangeDetectionStrategy.<%= changeDetection %> <% } %>
 })
