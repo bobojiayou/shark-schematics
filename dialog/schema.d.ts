@@ -8,7 +8,7 @@
 
 export interface Schema {
     /**
-     * The path to create the component.
+     * The path to create the dialog.
      */
     path?: string;
     /**
@@ -16,7 +16,7 @@ export interface Schema {
      */
     project?: string;
     /**
-     * The name of the component.
+     * The name of the dialog.
      */
     name: string;
     /**
@@ -56,7 +56,7 @@ export interface Schema {
      */
     skipImport?: boolean;
     /**
-     * The selector to use for the component.
+     * The selector to use for the dialog.
      */
     selector?: string;
     /**
@@ -64,11 +64,11 @@ export interface Schema {
      */
     module?: string;
     /**
-     * Specifies if declaring module exports the component.
+     * Specifies if declaring module exports the dialog.
      */
     export?: boolean;
-  /**
-   * Specifies if the component is an entry component of declaring module.
-   */
+    /**
+     * Specifies if the dialog is an entry dialog of declaring module.
+     */
     entryComponent?: boolean;
 }

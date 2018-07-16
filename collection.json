@@ -42,7 +42,7 @@
       "description": "Create an Angular component.",
       "schema": "./component/schema.json"
     },
-    "component": {
+    "dialog": {
       "aliases": [ "di" ],
       "factory": "./dialog",
       "description": "Create an Angular dialog.",

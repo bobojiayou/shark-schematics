@@ -290,6 +290,35 @@ export interface CliConfig {
             changeDetection?: ('Default' | 'OnPush');
         };
         /**
+   * Options for generating a dialog.
+   */
+        dialog?: {
+            /**
+             * Flag to indicate if a dir is created.
+             */
+            flat?: boolean;
+            /**
+             * Specifies if a spec file is generated.
+             */
+            spec?: boolean;
+            /**
+             * Specifies if the style will be in the ts file.
+             */
+            inlineStyle?: boolean;
+            /**
+             * Specifies if the template will be in the ts file.
+             */
+            inlineTemplate?: boolean;
+            /**
+             * Specifies the view encapsulation strategy.
+             */
+            viewEncapsulation?: ('Emulated' | 'Native' | 'None');
+            /**
+             * Specifies the change detection strategy.
+             */
+            changeDetection?: ('Default' | 'OnPush');
+        };
+        /**
          * Options for generating a directive.
          */
         directive?: {

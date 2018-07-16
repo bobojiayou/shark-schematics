@@ -13,7 +13,7 @@ import { Schema as WorkspaceOptions } from '../workspace/schema';
 import { Schema as ComponentOptions } from './schema';
 
 // tslint:disable:max-line-length
-describe('Component Schematic', () => {
+describe('Dialog Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
     'shark-schematics',
     path.join(__dirname, '../collection.json'),
@@ -53,14 +53,14 @@ describe('Component Schematic', () => {
     appTree = schematicRunner.runSchematic('application', appOptions, appTree);
   });
 
-  it('should create a component', () => {
+  it('should create a dialog', () => {
     const options = { ...defaultOptions };
-    const tree = schematicRunner.runSchematic('component', options, appTree);
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
     const files = tree.files;
-    expect(files.indexOf('/projects/bar/src/app/foo/foo.component.css')).toBeGreaterThanOrEqual(0);
-    expect(files.indexOf('/projects/bar/src/app/foo/foo.component.html')).toBeGreaterThanOrEqual(0);
-    expect(files.indexOf('/projects/bar/src/app/foo/foo.component.spec.ts')).toBeGreaterThanOrEqual(0);
-    expect(files.indexOf('/projects/bar/src/app/foo/foo.component.ts')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/projects/bar/src/app/foo/foo.dialog.css')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/projects/bar/src/app/foo/foo.dialog.html')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/projects/bar/src/app/foo/foo.dialog.spec.ts')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/projects/bar/src/app/foo/foo.dialog.ts')).toBeGreaterThanOrEqual(0);
     const moduleContent = tree.readContent('/projects/bar/src/app/app.module.ts');
     expect(moduleContent).toMatch(/import.*Foo.*from '.\/foo\/foo.component'/);
     expect(moduleContent).toMatch(/declarations:\s*\[[^\]]+?,\r?\n\s+FooComponent\r?\n/m);
@@ -69,44 +69,44 @@ describe('Component Schematic', () => {
   it('should set change detection to OnPush', () => {
     const options = { ...defaultOptions, changeDetection: 'OnPush' };
 
-    const tree = schematicRunner.runSchematic('component', options, appTree);
-    const tsContent = tree.readContent('/projects/bar/src/app/foo/foo.component.ts');
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
+    const tsContent = tree.readContent('/projects/bar/src/app/foo/foo.dialog.ts');
     expect(tsContent).toMatch(/changeDetection: ChangeDetectionStrategy.OnPush/);
   });
 
   it('should not set view encapsulation', () => {
     const options = { ...defaultOptions };
 
-    const tree = schematicRunner.runSchematic('component', options, appTree);
-    const tsContent = tree.readContent('/projects/bar/src/app/foo/foo.component.ts');
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
+    const tsContent = tree.readContent('/projects/bar/src/app/foo/foo.dialog.ts');
     expect(tsContent).not.toMatch(/encapsulation: ViewEncapsulation/);
   });
 
   it('should set view encapsulation to Emulated', () => {
     const options = { ...defaultOptions, viewEncapsulation: 'Emulated' };
 
-    const tree = schematicRunner.runSchematic('component', options, appTree);
-    const tsContent = tree.readContent('/projects/bar/src/app/foo/foo.component.ts');
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
+    const tsContent = tree.readContent('/projects/bar/src/app/foo/foo.dialog.ts');
     expect(tsContent).toMatch(/encapsulation: ViewEncapsulation.Emulated/);
   });
 
   it('should set view encapsulation to None', () => {
     const options = { ...defaultOptions, viewEncapsulation: 'None' };
 
-    const tree = schematicRunner.runSchematic('component', options, appTree);
-    const tsContent = tree.readContent('/projects/bar/src/app/foo/foo.component.ts');
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
+    const tsContent = tree.readContent('/projects/bar/src/app/foo/foo.dialog.ts');
     expect(tsContent).toMatch(/encapsulation: ViewEncapsulation.None/);
   });
 
-  it('should create a flat component', () => {
+  it('should create a flat dialog', () => {
     const options = { ...defaultOptions, flat: true };
 
-    const tree = schematicRunner.runSchematic('component', options, appTree);
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
     const files = tree.files;
-    expect(files.indexOf('/projects/bar/src/app/foo.component.css')).toBeGreaterThanOrEqual(0);
-    expect(files.indexOf('/projects/bar/src/app/foo.component.html')).toBeGreaterThanOrEqual(0);
-    expect(files.indexOf('/projects/bar/src/app/foo.component.spec.ts')).toBeGreaterThanOrEqual(0);
-    expect(files.indexOf('/projects/bar/src/app/foo.component.ts')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/projects/bar/src/app/foo.dialog.css')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/projects/bar/src/app/foo.dialog.html')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/projects/bar/src/app/foo.dialog.spec.ts')).toBeGreaterThanOrEqual(0);
+    expect(files.indexOf('/projects/bar/src/app/foo.dialog.ts')).toBeGreaterThanOrEqual(0);
   });
 
   it('should find the closest module', () => {
@@ -122,23 +122,23 @@ describe('Component Schematic', () => {
       export class FooModule { }
     `);
 
-    const tree = schematicRunner.runSchematic('component', options, appTree);
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
     const fooModuleContent = tree.readContent(fooModule);
-    expect(fooModuleContent).toMatch(/import { FooComponent } from '.\/foo.component'/);
+    expect(fooModuleContent).toMatch(/import { FooComponent } from '.\/foo.dialog'/);
   });
 
-  it('should export the component', () => {
+  it('should export the dialog', () => {
     const options = { ...defaultOptions, export: true };
 
-    const tree = schematicRunner.runSchematic('component', options, appTree);
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
     const appModuleContent = tree.readContent('/projects/bar/src/app/app.module.ts');
     expect(appModuleContent).toMatch(/exports: \[FooComponent\]/);
   });
 
-  it('should set the entry component', () => {
+  it('should set the entry dialog', () => {
     const options = { ...defaultOptions, entryComponent: true };
 
-    const tree = schematicRunner.runSchematic('component', options, appTree);
+    const tree = schematicRunner.runSchematic('dialog', options, appTree);
     const appModuleContent = tree.readContent('/projects/bar/src/app/app.module.ts');
     expect(appModuleContent).toMatch(/entryComponents: \[FooComponent\]/);
   });
