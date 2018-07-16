@@ -42,6 +42,12 @@
       "description": "Create an Angular component.",
       "schema": "./component/schema.json"
     },
+    "component": {
+      "aliases": [ "di" ],
+      "factory": "./dialog",
+      "description": "Create an Angular dialog.",
+      "schema": "./dialog/schema.json"
+    },
     "directive": {
       "aliases": [ "d" ],
       "factory": "./directive",

@@ -1,0 +1,15 @@
+<p>
+</p>
+
+<div class="modal-header">
+  <a class="modal-close" (click)="dismiss()"></a>
+  <span class="modal-title">{{title}}</span>
+</div>
+<div class="modal-body">
+  <div>  <%= dasherize(name) %> works!
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" type="button" (click)="dismiss()">取消</button>
+  <button class="btn btn-primary" type="button" (click)="submit()">提交</button>
+</div>
